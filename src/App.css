@@ -1,0 +1,219 @@
+/*
+=============== 
+Global Styles
+===============
+*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
+*,
+::after,
+::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+=============== 
+Navbar
+===============
+*/
+/* align-items: center; is best used on the main container. The align-items property will align the items on the cross axis. */
+.main-nav {
+  background-color: #272527;
+  height: 73px;
+  display: flex;
+  align-items: center;
+}
+/* width: 80%; give with to container, margin: 0 auto; centers our contaier within the with */
+.nav-center {
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.main-nav a, .main-nav button {
+  text-decoration: none;
+}
+
+a {
+  color: #baabab;
+  padding: 27px 21px;
+}
+
+a:hover {
+  color: #fff;
+  transition: all 0.1s linear;
+}
+
+.main-nav__logo {
+  position: relative;
+}
+
+.main-nav__logo img {
+    width: 140px;
+}
+
+.main-nav__link {
+  color: white;
+  font-weight: 700;
+  letter-spacing: .07em;
+  line-height: 1.4;
+  font-size: .75rem;
+  letter-spacing: .25em;
+  padding: 0;
+  position: relative;
+  text-align: left;
+  text-transform: uppercase;
+  z-index: 1; 
+  transition: all 0.1s linear;
+}
+
+
+/* UL = .main-nav__links  LI = .main-nav__link  */
+@media (min-width: 1040px) {
+  .main-nav__links {
+    display: flex;
+    /* height: 100%; */
+  }
+  .main-nav__link a {
+    float: left;
+  }
+  .toggle-btn {
+    display: none;
+  }
+  .main-nav__link a::before {
+    content: "";
+    display: block;
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    transform: scale(.5);
+    transition: all .4s;
+    background-color: #baabab;
+  }
+  
+  .main-nav__link a:hover::before {
+    opacity: 1;
+    transform: translateY(2px);
+  }
+
+  /* top: calc(100% + 13.5px); i used to change the postion of div redline */
+  .main-nav__logo a::before {
+    background-color: red;
+    content: "";
+    display: block;
+    position: absolute;
+
+    width: 100%;
+    height: 3px;
+    top: calc(100% + 13.5px);
+
+    left: 0;
+    bottom: 0;
+    z-index: 11;    
+  }
+}
+
+@media (max-width: 1040px) {
+  a, a:hover {
+    padding: 10px 10px;
+  }
+  .main-nav.open .main-nav__links {
+    opacity: 1;
+    visibility: visible;
+    transform: translateZ(0);
+    
+  }
+  /* main nav needs to be relative so that main-nav__links (our ul) can be relative to */
+  .main-nav.open {
+    position: relative;
+  }
+  .nav-center {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+  .main-nav__link {
+    margin-top: 10px;
+  }
+  .main-nav__links {
+    opacity: 0;
+    visibility: hidden;
+    background-color: #272527;
+    left: 0;
+    position: absolute;
+    top: 100%;
+    transform: translate3d(0,10px,0);
+    transition: all .4s;
+    width: 100%;
+  }
+  .toggle-nav__links-redline {
+    background: red;
+    height: 3px;
+    margin-top: 10px;
+  }
+  .toggle-btn {
+    position: relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    background-color: #272527;
+    /* border: 2px solid white; */
+  }
+  .toggle-btn__burger {
+    width: 25px;
+    height: 4px;
+    background: red;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+  }
+  .toggle-btn__burger::before,
+  .toggle-btn__burger::after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 4px;
+    background: white;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+  }
+  .toggle-btn__burger::before {
+    transform: translateY(-10px);
+  }
+  .toggle-btn__burger::after {
+    transform: translateY(10px);
+  }
+
+   /* TOOGLE BTN ANIMATION */
+  .toggle-btn.open .toggle-btn__burger {
+    transform: translateX(-10px);
+    background: transparent;
+  }
+  .toggle-btn.open .toggle-btn__burger::before {
+    transform: rotate(45deg) translate(5px, -5px);
+  }
+  .toggle-btn.open .toggle-btn__burger::after {
+    transform: rotate(-45deg) translate(5px, 5px)
+  }
+}
